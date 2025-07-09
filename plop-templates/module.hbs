@@ -1,0 +1,11 @@
+import { Module } from '@nestjs/common';
+import { {{properCase name}}Controller } from './{{kebabCase name}}.controller.js';
+import { {{properCase name}}Service } from './{{kebabCase name}}.service.js';
+import { {{properCase name}}Repository } from './{{kebabCase name}}.repository.js';
+
+@Module({
+  controllers: [{{properCase name}}Controller],
+  providers: [{{properCase name}}Service, {{properCase name}}Repository],
+  exports: [{{properCase name}}Service],
+})
+export class {{properCase name}}Module {} 

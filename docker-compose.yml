@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: adminjs-postgres
+    environment:
+      POSTGRES_DB: adminjs_db
+      POSTGRES_USER: adminjs_user
+      POSTGRES_PASSWORD: adminjs_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - adminjs-network
+
+  # Aplicación NestJS - MODO PRODUCCIÓN
+  app:
+    build: .
+    container_name: adminjs-app-prod
+    ports:
+      - "3001:3000"
+    environment:
+      DATABASE_URL: postgresql://adminjs_user:adminjs_password@postgres:5432/adminjs_db
+      DATABASE_NAME: adminjs_db
+      NODE_ENV: production
+    depends_on:
+      - postgres
+    networks:
+      - adminjs-network
+
+  # Aplicación NestJS - MODO DESARROLLO (con hot-reload)
+  app-dev:
+    build: .
+    container_name: adminjs-app-dev
+    command: npm run start:dev
+    ports:
+      - "3002:3000"
+    environment:
+      DATABASE_URL: postgresql://adminjs_user:adminjs_password@postgres:5432/adminjs_db
+      DATABASE_NAME: adminjs_db
+      NODE_ENV: development
+    depends_on:
+      - postgres
+    networks:
+      - adminjs-network
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
+
+networks:
+  adminjs-network:
+    driver: bridge 

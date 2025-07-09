@@ -22,52 +22,97 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# AdminJS v7 + NestJS + Prisma
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este proyecto es una integración de [AdminJS](https://adminjs.co/) v7 con [NestJS](https://nestjs.com/) y [Prisma](https://www.prisma.io/), preparado para entornos de desarrollo y producción usando Docker.
 
-## Installation
+## Requisitos previos
 
-```bash
-$ npm install
+- [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/)
+- Node.js 18+ (solo si quieres correr localmente sin Docker)
+- PostgreSQL (si no usas Docker para la base de datos)
+
+## Variables de entorno
+
+Copia el archivo `.env.example` a `.env` y ajusta las variables según tu entorno:
+
+```
+cp .env.example .env
 ```
 
-## Running the app
+## Instalación local (sin Docker)
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
+npx prisma generate
+npm run start:dev
 ```
 
-## Test
+## Uso con Docker
+
+### 1. Construir y levantar en desarrollo (hot-reload)
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+./docker-scripts.sh restart-dev
 ```
 
-## Support
+- Accede a la app en: [http://localhost:3002](http://localhost:3002)
+- Accede a AdminJS en: [http://localhost:3002/admin](http://localhost:3002/admin)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 2. Ver logs de desarrollo
 
-## Stay in touch
+```bash
+./docker-scripts.sh logs-dev
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 3. Parar los servicios de desarrollo
 
-## License
+```bash
+./docker-scripts.sh stop-dev
+```
 
-Nest is [MIT licensed](LICENSE).
+### 4. Construir y levantar en producción
+
+```bash
+./docker-scripts.sh build
+./docker-scripts.sh start
+```
+
+- Accede a la app en: [http://localhost:3001](http://localhost:3001)
+- Accede a AdminJS en: [http://localhost:3001/admin](http://localhost:3001/admin)
+
+### 5. Comandos útiles de Prisma
+
+- Ejecutar migraciones:
+  ```bash
+  ./docker-scripts.sh prisma-migrate
+  ```
+- Sembrar la base de datos:
+  ```bash
+  ./docker-scripts.sh prisma-seed
+  ```
+- Limpiar la base de datos (solo desarrollo):
+  ```bash
+  ./docker-scripts.sh prisma-clean
+  ```
+
+## Estructura de scripts
+
+- `restart-dev`: Reinicia el entorno de desarrollo, limpia e instala dependencias dentro del contenedor.
+- `logs-dev`: Muestra los logs de desarrollo.
+- `stop-dev`: Detiene los servicios de desarrollo.
+- `build`: Construye la imagen de producción.
+- `start`: Levanta la app en modo producción.
+- `prisma-migrate`: Ejecuta migraciones de Prisma.
+- `prisma-seed`: Ejecuta el seed de Prisma.
+- `prisma-clean`: Limpia la base de datos (solo desarrollo).
+
+## Notas
+
+- En desarrollo, los cambios en el código se reflejan automáticamente gracias al volumen montado y el hot-reload.
+- Si cambias el schema de Prisma, asegúrate de correr `prisma generate` dentro del contenedor o reiniciar el entorno de desarrollo.
+- Para producción, la imagen es ligera y optimizada usando Alpine.
+
+---
+
+**Autor:** Leonardo Sifuentes

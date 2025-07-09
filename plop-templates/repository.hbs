@@ -1,0 +1,11 @@
+import { Injectable } from '@nestjs/common';
+import { {{properCase name}} } from './{{kebabCase name}}.entity.js';
+
+@Injectable()
+export class {{properCase name}}Repository {
+  private items: {{properCase name}}[] = [];
+
+  findAll(): {{properCase name}}[] {
+    return this.items;
+  }
+} 

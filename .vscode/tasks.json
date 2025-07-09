@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "npm run build",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Lint",
+      "type": "shell",
+      "command": "npm run lint",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Test",
+      "type": "shell",
+      "command": "npm run test",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Prisma: Migrate Dev",
+      "type": "shell",
+      "command": "npx prisma migrate dev",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Prisma: Generate",
+      "type": "shell",
+      "command": "npx prisma generate",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Prisma: Studio",
+      "type": "shell",
+      "command": "npx prisma studio",
+      "group": "none",
+      "problemMatcher": []
+    }
+  ]
+} 

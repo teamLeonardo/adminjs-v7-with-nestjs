@@ -1,0 +1,24 @@
+{
+  "messages": {
+    "welcome": "Bienvenido al Panel de Administración",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "dashboard": "Panel Principal",
+    "users": "Usuarios",
+    "roles": "Roles",
+    "organizations": "Organizaciones",
+    "settings": "Configuración",
+    "profile": "Perfil",
+    "language": "Idioma",
+    "actions": "Acciones",
+    "create": "Crear",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "import": "Importar"
+  }
+}

@@ -1,0 +1,12 @@
+import { Controller, Get } from '@nestjs/common';
+import { {{properCase name}}Service } from './{{kebabCase name}}.service.js';
+
+@Controller('{{kebabCase name}}')
+export class {{properCase name}}Controller {
+  constructor(private readonly service: {{properCase name}}Service) {}
+
+  @Get()
+  findAll() {
+    return this.service.findAll();
+  }
+} 
